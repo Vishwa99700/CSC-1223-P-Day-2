@@ -1,0 +1,155 @@
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use uov;
+Database changed
+MariaDB [uov]> create table patient(PatientID VARCHAR(30), Name VARCHAR(30), Address VARCHAR(30), Phone VARCHAR(30));
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [uov]> DESC patient;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| PatientID | varchar(30) | YES  |     | NULL    |       |
+| Name      | varchar(30) | YES  |     | NULL    |       |
+| Address   | varchar(30) | YES  |     | NULL    |       |
+| Phone     | varchar(30) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.013 sec)
+
+MariaDB [uov]> create table Hospital(PatientID VARCHAR(30) PRIMARY KEY, Name VARCHAR(30), Address VARCHAR(30), Phone VARCHAR(30));
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [uov]>  DESC Hospial;
+ERROR 1146 (42S02): Table 'uov.hospial' doesn't exist
+MariaDB [uov]>  DESC Hospital;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| PatientID | varchar(30) | NO   | PRI | NULL    |       |
+| Name      | varchar(30) | YES  |     | NULL    |       |
+| Address   | varchar(30) | YES  |     | NULL    |       |
+| Phone     | varchar(30) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.016 sec)
+
+MariaDB [uov]> INSERT INTO Hospital VALUES(100000001,'John Smith', '42 Foobar Lane','55-0256');
+Query OK, 1 row affected (0.052 sec)
+
+MariaDB [uov]>  INSERT INTO Hospital VALUES(100000002,'Grace Ritchie', '37 Snafu Drive','555-0512');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  INSERT INTO Hospital VALUES(100000003,'Todd Quinlan', '101 omgbbq Street','555-1204');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  INSERT INTO Hospital VALUES(100000004,'Denis Doe', '1100 Foobaz Avenue','555-2048');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> DESC Hospital;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| PatientID | varchar(30) | NO   | PRI | NULL    |       |
+| Name      | varchar(30) | YES  |     | NULL    |       |
+| Address   | varchar(30) | YES  |     | NULL    |       |
+| Phone     | varchar(30) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.014 sec)
+
+MariaDB [uov]> select * from Hospital;
++-----------+---------------+--------------------+----------+
+| PatientID | Name          | Address            | Phone    |
++-----------+---------------+--------------------+----------+
+| 100000001 | John Smith    | 42 Foobar Lane     | 55-0256  |
+| 100000002 | Grace Ritchie | 37 Snafu Drive     | 555-0512 |
+| 100000003 | Todd Quinlan  | 101 omgbbq Street  | 555-1204 |
+| 100000004 | Denis Doe     | 1100 Foobaz Avenue | 555-2048 |
++-----------+---------------+--------------------+----------+
+4 rows in set (0.000 sec)
+
+MariaDB [uov]> delete from Hospital;
+Query OK, 4 rows affected (0.004 sec)
+
+MariaDB [uov]> DESE Hospital;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'DESE Hospital' at line 1
+MariaDB [uov]> DESC Hospital;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| PatientID | varchar(30) | NO   | PRI | NULL    |       |
+| Name      | varchar(30) | YES  |     | NULL    |       |
+| Address   | varchar(30) | YES  |     | NULL    |       |
+| Phone     | varchar(30) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.014 sec)
+
+MariaDB [uov]>  INSERT INTO Hospital VALUES(100000001,'John Smith', '42 Foobar Lane','555-0256');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  INSERT INTO Hospital VALUES(100000002,'Grace Ritchie', '37 Snafu Drive','555-0512');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [uov]> INSERT INTO Hospital VALUES(100000003,'Todd Quinlan', '101 omgbbq Street','555-1204');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> INSERT INTO Hospital VALUES(100000004,'Denis Doe', '1100 Foobaz Avenue','555-2048');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  select * from Hospital;
++-----------+---------------+--------------------+----------+
+| PatientID | Name          | Address            | Phone    |
++-----------+---------------+--------------------+----------+
+| 100000001 | John Smith    | 42 Foobar Lane     | 555-0256 |
+| 100000002 | Grace Ritchie | 37 Snafu Drive     | 555-0512 |
+| 100000003 | Todd Quinlan  | 101 omgbbq Street  | 555-1204 |
+| 100000004 | Denis Doe     | 1100 Foobaz Avenue | 555-2048 |
++-----------+---------------+--------------------+----------+
+4 rows in set (0.000 sec)
+
+MariaDB [uov]> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database' at line 1
+MariaDB [uov]> SHOW database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database' at line 1
+MariaDB [uov]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| agriharvesnexus    |
+| bfl                |
+| bookboat           |
+| bookdb             |
+| bookspage          |
+| bookstore          |
+| company            |
+| employee           |
+| emplyee management |
+| englishfi          |
+| icae02             |
+| information_schema |
+| it1223db           |
+| library            |
+| librarysystem      |
+| moviedb            |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| physician          |
+| retailstore        |
+| student            |
+| students           |
+| test               |
+| university         |
+| uov                |
++--------------------+
+26 rows in set (0.047 sec)
+
+MariaDB [uov]> DROP database ica2;
+ERROR 1008 (HY000): Can't drop database 'ica2'; database doesn't exist
+MariaDB [uov]>

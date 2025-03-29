@@ -1,0 +1,80 @@
+2022ASP12@CL2-20 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use uov;
+Database changed
+MariaDB [uov]> DESC SD;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | varchar(30) | NO   | PRI | NULL    |       |
+| Name  | varchar(30) | YES  |     | NULL    |       |
+| Age   | varchar(3)  | YES  |     | NULL    |       |
+| Grade | varchar(1)  | YES  |     | NULL    |       |
+| City  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.013 sec)
+
+MariaDB [uov]>  INSERT INTO SD VALUES(1,'Alice', '20','A','New York');
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+MariaDB [uov]>  INSERT INTO SD VALUES(1,'Alice', '20','A','Bye
+
+2022ASP12@CL2-20 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use uov;
+Database changed
+MariaDB [uov]>  INSERT INTO SD VALUES(2,'Bob', '22','B','Chicago');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  INSERT INTO SD VALUES(3,'Charlie', '21','A','New York');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  INSERT INTO SD VALUES(4,'David', '23','C','Boston');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  INSERT INTO SD VALUES(5,'Emma', '22','B','Chicago');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  INSERT INTO SD VALUES(6,'Frank', '20','A','Los Angeles');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> select * from SD;
++----+---------+------+-------+-------------+
+| ID | Name    | Age  | Grade | City        |
++----+---------+------+-------+-------------+
+| 1  | Alice   | 20   | A     | New York    |
+| 2  | Bob     | 22   | B     | Chicago     |
+| 3  | Charlie | 21   | A     | New York    |
+| 4  | David   | 23   | C     | Boston      |
+| 5  | Emma    | 22   | B     | Chicago     |
+| 6  | Frank   | 20   | A     | Los Angeles |
++----+---------+------+-------+-------------+
+6 rows in set (0.000 sec)
+
+MariaDB [uov]>
+MariaDB [uov]> LOAD DATA LOCAL INFILE 'C:/Users/2022ASP12/Desktop/Database/Day 2/Ex 2/DB.csv'
+    -> INTO TABLE SD
+    -> FIELDS TERMINATED BY ','
+    -> LINES TERMINATED BY '\n'
+    -> (ID,Name,Age,Grade,City);
+Query OK, 6 rows affected, 1 warning (0.005 sec)
+Records: 6  Deleted: 0  Skipped: 0  Warnings: 1
+
+MariaDB [uov]>
