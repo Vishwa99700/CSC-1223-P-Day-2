@@ -1,0 +1,566 @@
+
+Setting environment for using XAMPP for Windows.
+2022ASP12@CL2-49 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| 1223db             |
+| bfl                |
+| book               |
+| bookboat           |
+| bookdb             |
+| books              |
+| company            |
+| employees          |
+| englishfi          |
+| hospital           |
+| hospitaldb         |
+| icae02             |
+| information_schema |
+| inventary          |
+| it1223db           |
+| library            |
+| librarysystem      |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| retailstore        |
+| smartlibrary       |
+| spjbase            |
+| studentdb          |
+| students           |
+| test               |
+| university         |
+| uov                |
++--------------------+
+28 rows in set (0.061 sec)
+
+MariaDB [(none)]> use uov;
+Database changed
+MariaDB [uov]> show tables;
++---------------+
+| Tables_in_uov |
++---------------+
+| employee      |
+| officers      |
+| students      |
++---------------+
+3 rows in set (0.001 sec)
+
+MariaDB [uov]> use students;
+Database changed
+MariaDB [students]> show students;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'students' at line 1
+MariaDB [students]> select * from students;
++------------+----------+-----+--------+
+| id         | name     | age | course |
++------------+----------+-----+--------+
+| 2020/ASP/0 | J.Paul   |  23 | ICT    |
+| 2020/ASP/1 | P.kolins |  25 | CSC    |
+| 2020/ASP/2 | R.Kalani |  23 | CSS    |
+| 2020/ASP/3 | W.Nimal  |  24 | CSS    |
+| 2020/ASP/4 | J.Paul   |  23 | ICT    |
++------------+----------+-----+--------+
+5 rows in set (0.035 sec)
+
+MariaDB [students]> use employee
+ERROR 1049 (42000): Unknown database 'employee'
+MariaDB [students]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| 1223db             |
+| bfl                |
+| book               |
+| bookboat           |
+| bookdb             |
+| books              |
+| company            |
+| employees          |
+| englishfi          |
+| hospital           |
+| hospitaldb         |
+| icae02             |
+| information_schema |
+| inventary          |
+| it1223db           |
+| library            |
+| librarysystem      |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| retailstore        |
+| smartlibrary       |
+| spjbase            |
+| studentdb          |
+| students           |
+| test               |
+| university         |
+| uov                |
++--------------------+
+28 rows in set (0.001 sec)
+
+MariaDB [students]> use uov
+Database changed
+MariaDB [uov]> show tables
+    -> ;
++---------------+
+| Tables_in_uov |
++---------------+
+| employee      |
+| officers      |
+| students      |
++---------------+
+3 rows in set (0.001 sec)
+
+MariaDB [uov]> use employee;
+ERROR 1049 (42000): Unknown database 'employee'
+MariaDB [uov]> use employee
+ERROR 1049 (42000): Unknown database 'employee'
+MariaDB [uov]> use officers;
+ERROR 1049 (42000): Unknown database 'officers'
+MariaDB [uov]> desc employee;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| PhysicianId | char(15)    | YES  |     | NULL    |       |
+| Name        | varchar(20) | YES  |     | NULL    |       |
+| Position    | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.015 sec)
+
+MariaDB [uov]> desc officers;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | int(11)     | NO   | PRI | NULL    |       |
+| Name  | varchar(30) | YES  |     | NULL    |       |
+| Age   | int(2)      | YES  |     | NULL    |       |
+| Garde | char(1)     | YES  |     | NULL    |       |
+| City  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.015 sec)
+
+MariaDB [uov]> select * from officers;
++----+------+------+-------+------+
+| ID | Name | Age  | Garde | City |
++----+------+------+-------+------+
+|  1 | 20   |    0 | N     | NULL |
+|  2 | 22   |    0 | C     | NULL |
+|  3 | 21   |    0 | N     | NULL |
+|  4 | 23   |    0 | B     | NULL |
+|  5 | 22   |    0 | C     | NULL |
+|  6 | 20   |    0 | L     | NULL |
++----+------+------+-------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [uov]> drop table officers;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [uov]> create table Officers(ID  VARCHAR(30), Name VARCHAR(30), Address VARCHAR(30), Phone VARCHAR(30));
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [uov]>  drop table Officers;
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [uov]> create table Officers(ID  VARCHAR(30) INT PRIMARY KEY, Name VARCHAR(30), Age VARCHAR(3), Grade VARCHAR(1), City VARCHAR(30));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INT PRIMARY KEY, Name VARCHAR(30), Age VARCHAR(3), Grade VARCHAR(1), City VAR...' at line 1
+MariaDB [uov]> create table Officers(ID  VARCHAR(30)  PRIMARY KEY, Name VARCHAR(30), Age VARCHAR(3), Grade VARCHAR(1), City VARCHAR(30));
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [uov]> INSERT INTO Officers VALUES(1,"Alice",20,'A',"New York");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [uov]> INSERT INTO Officers VALUES(2,"Bob",22,'B',"Chicago");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [uov]> Bye
+
+2022ASP12@CL2-49 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use uov;
+Database changed
+MariaDB [uov]> select * from Officers;
++----+-------+------+-------+----------+
+| ID | Name  | Age  | Grade | City     |
++----+-------+------+-------+----------+
+| 1  | Alice | 20   | A     | New York |
+| 2  | Bob   | 22   | B     | Chicago  |
++----+-------+------+-------+----------+
+2 rows in set (0.000 sec)
+
+MariaDB [uov]> Bye
+
+2022ASP12@CL2-49 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use uov;
+Database changed
+MariaDB [uov]> select * from Officers;
++----+-------+------+-------+----------+
+| ID | Name  | Age  | Grade | City     |
++----+-------+------+-------+----------+
+| 1  | Alice | 20   | A     | New York |
+| 2  | Bob   | 22   | B     | Chicago  |
++----+-------+------+-------+----------+
+2 rows in set (0.000 sec)
+
+MariaDB [uov]>  INSERT INTO Officers VALUES(3,"Charlie",21,'A',"New york");
+Query OK, 1 row affected (0.026 sec)
+
+MariaDB [uov]>  INSERT INTO Officers VALUES(4,"David",23,'C',"Boston");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  INSERT INTO Officers VALUES(5,"Emma",22,'B',"Chicago");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [uov]>  INSERT INTO Officers VALUES(6,"Frank",20,'A',"Los Angeles");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> select * from Officers;
++----+---------+------+-------+-------------+
+| ID | Name    | Age  | Grade | City        |
++----+---------+------+-------+-------------+
+| 1  | Alice   | 20   | A     | New York    |
+| 2  | Bob     | 22   | B     | Chicago     |
+| 3  | Charlie | 21   | A     | New york    |
+| 4  | David   | 23   | C     | Boston      |
+| 5  | Emma    | 22   | B     | Chicago     |
+| 6  | Frank   | 20   | A     | Los Angeles |
++----+---------+------+-------+-------------+
+6 rows in set (0.000 sec)
+
+MariaDB [uov]> select Name,Grade from Officers;
++---------+-------+
+| Name    | Grade |
++---------+-------+
+| Alice   | A     |
+| Bob     | B     |
+| Charlie | A     |
+| David   | C     |
+| Emma    | B     |
+| Frank   | A     |
++---------+-------+
+6 rows in set (0.001 sec)
+
+MariaDB [uov]> select Name,City from WHERE City = "Chicago";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE City = "Chicago"' at line 1
+MariaDB [uov]>  select * from Name,City  WHERE City = 'Chicago';
+ERROR 1146 (42S02): Table 'uov.name' doesn't exist
+MariaDB [uov]> use Officers;
+ERROR 1049 (42000): Unknown database 'officers'
+MariaDB [uov]>
+MariaDB [uov]>  select * from Officers  WHERE City = 'Chicago';
++----+------+------+-------+---------+
+| ID | Name | Age  | Grade | City    |
++----+------+------+-------+---------+
+| 2  | Bob  | 22   | B     | Chicago |
+| 5  | Emma | 22   | B     | Chicago |
++----+------+------+-------+---------+
+2 rows in set (0.000 sec)
+
+MariaDB [uov]>  select * from Officers  WHERE Grade = 'A';
++----+---------+------+-------+-------------+
+| ID | Name    | Age  | Grade | City        |
++----+---------+------+-------+-------------+
+| 1  | Alice   | 20   | A     | New York    |
+| 3  | Charlie | 21   | A     | New york    |
+| 6  | Frank   | 20   | A     | Los Angeles |
++----+---------+------+-------+-------------+
+3 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers where Age BETWEEN 20 and 22;
++----+---------+------+-------+-------------+
+| ID | Name    | Age  | Grade | City        |
++----+---------+------+-------+-------------+
+| 1  | Alice   | 20   | A     | New York    |
+| 2  | Bob     | 22   | B     | Chicago     |
+| 3  | Charlie | 21   | A     | New york    |
+| 5  | Emma    | 22   | B     | Chicago     |
+| 6  | Frank   | 20   | A     | Los Angeles |
++----+---------+------+-------+-------------+
+5 rows in set (0.001 sec)
+
+MariaDB [uov]> select city from Officers;
++-------------+
+| city        |
++-------------+
+| New York    |
+| Chicago     |
+| New york    |
+| Boston      |
+| Chicago     |
+| Los Angeles |
++-------------+
+6 rows in set (0.000 sec)
+
+MariaDB [uov]> select DISTINCT city from Officers;
++-------------+
+| city        |
++-------------+
+| New York    |
+| Chicago     |
+| Boston      |
+| Los Angeles |
++-------------+
+4 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers  WHERE name ='Alice';
++----+-------+------+-------+----------+
+| ID | Name  | Age  | Grade | City     |
++----+-------+------+-------+----------+
+| 1  | Alice | 20   | A     | New York |
++----+-------+------+-------+----------+
+1 row in set (0.001 sec)
+
+MariaDB [uov]> select 8 from Officers WHERE Name like '%e';
++---+
+| 8 |
++---+
+| 8 |
+| 8 |
++---+
+2 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE Name like '%e';
++----+---------+------+-------+----------+
+| ID | Name    | Age  | Grade | City     |
++----+---------+------+-------+----------+
+| 1  | Alice   | 20   | A     | New York |
+| 3  | Charlie | 21   | A     | New york |
++----+---------+------+-------+----------+
+2 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE Name like '%i';
+Empty set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE Name like '%i%';
++----+---------+------+-------+----------+
+| ID | Name    | Age  | Grade | City     |
++----+---------+------+-------+----------+
+| 1  | Alice   | 20   | A     | New York |
+| 3  | Charlie | 21   | A     | New york |
+| 4  | David   | 23   | C     | Boston   |
++----+---------+------+-------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE Name like '%li%';
++----+---------+------+-------+----------+
+| ID | Name    | Age  | Grade | City     |
++----+---------+------+-------+----------+
+| 1  | Alice   | 20   | A     | New York |
+| 3  | Charlie | 21   | A     | New york |
++----+---------+------+-------+----------+
+2 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE City Like ='New';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '='New'' at line 1
+MariaDB [uov]> select * from Officers WHERE City Like 'New';
+Empty set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE City like 'New';
+Empty set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE City like 'New%';
++----+---------+------+-------+----------+
+| ID | Name    | Age  | Grade | City     |
++----+---------+------+-------+----------+
+| 1  | Alice   | 20   | A     | New York |
+| 3  | Charlie | 21   | A     | New york |
++----+---------+------+-------+----------+
+2 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE City IN('NEW York', 'Los Angeles');
++----+---------+------+-------+-------------+
+| ID | Name    | Age  | Grade | City        |
++----+---------+------+-------+-------------+
+| 1  | Alice   | 20   | A     | New York    |
+| 3  | Charlie | 21   | A     | New york    |
+| 6  | Frank   | 20   | A     | Los Angeles |
++----+---------+------+-------+-------------+
+3 rows in set (0.001 sec)
+
+MariaDB [uov]> select * from Officers WHERE City,Grade IN('NEW York', 'A');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'Grade IN('NEW York', 'A')' at line 1
+MariaDB [uov]> select * from Officers WHERE City ='NEW York'And Grade = 'A';
++----+---------+------+-------+----------+
+| ID | Name    | Age  | Grade | City     |
++----+---------+------+-------+----------+
+| 1  | Alice   | 20   | A     | New York |
+| 3  | Charlie | 21   | A     | New york |
++----+---------+------+-------+----------+
+2 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE City ='NEW York'Or Grade = 'A';
++----+---------+------+-------+-------------+
+| ID | Name    | Age  | Grade | City        |
++----+---------+------+-------+-------------+
+| 1  | Alice   | 20   | A     | New York    |
+| 3  | Charlie | 21   | A     | New york    |
+| 6  | Frank   | 20   | A     | Los Angeles |
++----+---------+------+-------+-------------+
+3 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE NOT Grade 'A';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''A'' at line 1
+MariaDB [uov]> select * from Officers WHERE  Grade! 'A';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '! 'A'' at line 1
+MariaDB [uov]> select * from Officers WHERE  Grade! = 'A';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '! = 'A'' at line 1
+MariaDB [uov]> select * from Officers WHERE  Grade!= 'A';
++----+-------+------+-------+---------+
+| ID | Name  | Age  | Grade | City    |
++----+-------+------+-------+---------+
+| 2  | Bob   | 22   | B     | Chicago |
+| 4  | David | 23   | C     | Boston  |
+| 5  | Emma  | 22   | B     | Chicago |
++----+-------+------+-------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers WHERE  City!= ('New York', 'Los Angeles)';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [uov]> select * from Officers WHERE  City!='New York' And City!= 'Los Angeles';
++----+-------+------+-------+---------+
+| ID | Name  | Age  | Grade | City    |
++----+-------+------+-------+---------+
+| 2  | Bob   | 22   | B     | Chicago |
+| 4  | David | 23   | C     | Boston  |
+| 5  | Emma  | 22   | B     | Chicago |
++----+-------+------+-------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [uov]> select * from Officers LIMIT 3';
+ '> select * from Officers LIMIT 3;
+    '> ;
+    '> select * from Officers WHERE  City!= ('New York', 'Los Angeles)'
+    '> select * from Officers WHERE  City!= ('New York', 'Los Angeles)'
+    '>
+    '>
+    '> use uov;
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '';
+select * from Officers LIMIT 3;
+;
+select * from Officers WHERE  City!= ('N...' at line 1
+MariaDB [uov]> select * from Officers LIMIT 3;
++----+---------+------+-------+----------+
+| ID | Name    | Age  | Grade | City     |
++----+---------+------+-------+----------+
+| 1  | Alice   | 20   | A     | New York |
+| 2  | Bob     | 22   | B     | Chicago  |
+| 3  | Charlie | 21   | A     | New york |
++----+---------+------+-------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [uov]> select COUNT(ID)  from Officer;
+ERROR 1146 (42S02): Table 'uov.officer' doesn't exist
+MariaDB [uov]> select COUNT(ID)  from Officers;
++-----------+
+| COUNT(ID) |
++-----------+
+|         6 |
++-----------+
+1 row in set (0.000 sec)
+
+MariaDB [uov]> select MAX(AGE)  from Officers;
++----------+
+| MAX(AGE) |
++----------+
+| 23       |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [uov]> select MIN(AGE)  from Officers;
++----------+
+| MIN(AGE) |
++----------+
+| 20       |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [uov]> select AVG(AGE)  from Officers;
++--------------------+
+| AVG(AGE)           |
++--------------------+
+| 21.333333333333332 |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [uov]> select UPPER(NAME)  from Officers;
++-------------+
+| UPPER(NAME) |
++-------------+
+| ALICE       |
+| BOB         |
+| CHARLIE     |
+| DAVID       |
+| EMMA        |
+| FRANK       |
++-------------+
+6 rows in set (0.000 sec)
+
+MariaDB [uov]> select LOWER(NAME)  from Officers;
++-------------+
+| LOWER(NAME) |
++-------------+
+| alice       |
+| bob         |
+| charlie     |
+| david       |
+| emma        |
+| frank       |
++-------------+
+6 rows in set (0.000 sec)
+
+MariaDB [uov]> select SUM(AGE)  from Officers;
++----------+
+| SUM(AGE) |
++----------+
+|      128 |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [uov]> select name as student_name from Officers;
++--------------+
+| student_name |
++--------------+
+| Alice        |
+| Bob          |
+| Charlie      |
+| David        |
+| Emma         |
+| Frank        |
++--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [uov]>

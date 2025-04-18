@@ -1,0 +1,359 @@
+
+Setting environment for using XAMPP for Windows.
+2022ASP12@CL2-50 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use uov
+Database changed
+MariaDB [uov]> select * from Employee;
++-------------+-------------------+----------------------+
+| PhysicianID | Name              | Position             |
++-------------+-------------------+----------------------+
+| 1           | John Dorian       | Staff Internist      |
+| 2           | Elliet Reid       | Attending Physician  |
+| 3           | Christoper Turk   | Surgical Attending P |
+| 4           | Persival Cox      | Senior Attending Phy |
+| 4           | Keith Deiedmister | MD Resident          |
+| 6           | molly  clock      |  Attending phsycarti |
++-------------+-------------------+----------------------+
+6 rows in set (0.016 sec)
+
+MariaDB [uov]> drop table Employee;
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [uov]> create table Employee(Emp_ID  VARCHAR(30) INT PRIMARY KEY, Name VARCHAR(30),Age VARCHAR(3), Department VARCHAR(10), Salary VARCHAR(30), City VARCHAR(30));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INT PRIMARY KEY, Name VARCHAR(30),Age VARCHAR(3), Department VARCHAR(10), Sal...' at line 1
+MariaDB [uov]>  create table Employee(Emp_ID  VARCHAR(30)  PRIMARY KEY, Name VARCHAR(30),Age VARCHAR(3), Department VARCHAR(10), Salary VARCHAR(30), City VARCHAR(30));
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [uov]> INSERT INTO Employee VALUES(101,"Alice",30,"HR", 600000.00,"New York");
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [uov]>  INSERT INTO Employee VALUES(102,"Bob",28,"IT", 750000.00,"Los Angeles");
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [uov]>  INSERT INTO Employee VALUES(103,"Charlie",35,"Finace", 800000.00,"Chicago");
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [uov]>  INSERT INTO Employee VALUES(104,"David",40,"IT", 900000.00,"San Francisco");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  INSERT INTO Employee VALUES(105,"Emma",32,"Marketing", 700000.00,"New York");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]>  INSERT INTO Employee VALUES(106,"Frank",27,"HR", 500000.00,"Chicago");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> select * from Employee;
++--------+---------+------+------------+-----------+---------------+
+| Emp_ID | Name    | Age  | Department | Salary    | City          |
++--------+---------+------+------------+-----------+---------------+
+| 101    | Alice   | 30   | HR         | 600000.00 | New York      |
+| 102    | Bob     | 28   | IT         | 750000.00 | Los Angeles   |
+| 103    | Charlie | 35   | Finace     | 800000.00 | Chicago       |
+| 104    | David   | 40   | IT         | 900000.00 | San Francisco |
+| 105    | Emma    | 32   | Marketing  | 700000.00 | New York      |
+| 106    | Frank   | 27   | HR         | 500000.00 | Chicago       |
++--------+---------+------+------------+-----------+---------------+
+6 rows in set (0.003 sec)
+
+MariaDB [uov]> select Name,Salary from Employee;
++---------+-----------+
+| Name    | Salary    |
++---------+-----------+
+| Alice   | 600000.00 |
+| Bob     | 750000.00 |
+| Charlie | 800000.00 |
+| David   | 900000.00 |
+| Emma    | 700000.00 |
+| Frank   | 500000.00 |
++---------+-----------+
+6 rows in set (0.001 sec)
+
+MariaDB [uov]> select DISTINCT Department from Employee;
++------------+
+| Department |
++------------+
+| HR         |
+| IT         |
+| Finace     |
+| Marketing  |
++------------+
+4 rows in set (0.003 sec)
+
+MariaDB [uov]> select * from Employee WHERE Department Like ='IT'
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '='IT'' at line 1
+MariaDB [uov]> select * from Employee WHERE Department Like 'IT';
++--------+-------+------+------------+-----------+---------------+
+| Emp_ID | Name  | Age  | Department | Salary    | City          |
++--------+-------+------+------------+-----------+---------------+
+| 102    | Bob   | 28   | IT         | 750000.00 | Los Angeles   |
+| 104    | David | 40   | IT         | 900000.00 | San Francisco |
++--------+-------+------+------------+-----------+---------------+
+2 rows in set (0.006 sec)
+
+MariaDB [uov]> 0000.00 | Chicago       |
+    -> | 104    | David   | 40   | IT         | 900000.00 | San Francisco |
+    -> | 105    | Emma    | 32   | Marketing  | 700000.00 | New York      |
+    -> | 106    | Frank   | 27   | HR         | 500000.00 | Chicago       |
+    -> +--------+---------+------+------------+-----------+---------------+
+    -> 6 rows in set (0.003 sec)
+    ->
+    -> MariaDB [uov]> select Name,Salary from Employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0000.00 | Chicago       |
+| 104    | David   | 40   | IT         | 900000.00 ...' at line 1
+MariaDB [uov]> +---------+-----------+
+    -> | Name    | Salary    |
+    -> +---------+-----------+
+    -> | Alice   | 600000.00 |
+    -> | Bob     | 750000.00 |
+    -> | Charlie | 800000.00 |
+    -> | David   | 900000.00 |
+    -> ,;|
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '+---------+-----------+
+| Name    | Salary    |
++---------+-----------+
+| Ali...' at line 1
+    -> ';
+    '> ;
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '|
+';
+;
+'' at line 1
+MariaDB [uov]> select Name from Employee WHERE Department = "IT";
++-------+
+| Name  |
++-------+
+| Bob   |
+| David |
++-------+
+2 rows in set (0.003 sec)
+
+MariaDB [uov]> select Name from Employee WHERE SALARY>70000.00;
++---------+
+| Name    |
++---------+
+| Alice   |
+| Bob     |
+| Charlie |
+| David   |
+| Emma    |
+| Frank   |
++---------+
+6 rows in set (0.005 sec)
+
+MariaDB [uov]> select Name from Employee WHERE Age BETWEEN 30 and 40;
++---------+
+| Name    |
++---------+
+| Alice   |
+| Charlie |
+| David   |
+| Emma    |
++---------+
+4 rows in set (0.003 sec)
+
+MariaDB [uov]> select Name from Employee WHERE City = 'New York' and 'Chicago';
+Empty set, 5 warnings (0.006 sec)
+
+MariaDB [uov]> select Name from Employee WHERE City = 'New York' OR 'Chicago';
++-------+
+| Name  |
++-------+
+| Alice |
+| Emma  |
++-------+
+2 rows in set, 5 warnings (0.000 sec)
+
+MariaDB [uov]> select Name from Employee WHERE City = 'New York' OR City = 'Chicago';
++---------+
+| Name    |
++---------+
+| Alice   |
+| Charlie |
+| Emma    |
+| Frank   |
++---------+
+4 rows in set (0.000 sec)
+
+MariaDB [uov]> create tabale Retail_Store(ProductID INT(3) PRIMARY KEY, Name VARCHAR(30) NOT NULL, Category VARCHAR(30),Price DOUBLE(10,2), Stock_Quantity INT(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'tabale Retail_Store(ProductID INT(3) PRIMARY KEY, Name VARCHAR(30) NOT NULL, ...' at line 1
+MariaDB [uov]> create tabale Retail_Store(ProductID INT(3) PRIMARY KEY, Name VARCHAR(30) , Category VARCHAR(30),Price DOUBLE(10,2), Stock_Quantity INT(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'tabale Retail_Store(ProductID INT(3) PRIMARY KEY, Name VARCHAR(30) , Category...' at line 1
+MariaDB [uov]> create table Retail_Store(ProductID INT(3) PRIMARY KEY, Name VARCHAR(30) , Category VARCHAR(30),Price DOUBLE(10,2), Stock_Quantity INT(20));
+Query OK, 0 rows affected (0.013 sec)
+
+MariaDB [uov]> INSERT INTO Retail_Store VALUES(1, "Ultra HD Television","Electronics",1200, 30);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [uov]> INSERT INTO Retail_Store VALUES(2, "Running Shoes","Footwear",100, 50);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> INSERT INTO Retail_Store VALUES(3, "Electric Kettle","Appliances",45, 25);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> INSERT INTO Retail_Store VALUES(4, "Denim Jeans","Clothing",60, 40);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> INSERT INTO Retail_Store VALUES(5, "Blutooth Headphone","Electronics",150, 15);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> select * from Retail_Store;
++-----------+---------------------+-------------+---------+----------------+
+| ProductID | Name                | Category    | Price   | Stock_Quantity |
++-----------+---------------------+-------------+---------+----------------+
+|         1 | Ultra HD Television | Electronics | 1200.00 |             30 |
+|         2 | Running Shoes       | Footwear    |  100.00 |             50 |
+|         3 | Electric Kettle     | Appliances  |   45.00 |             25 |
+|         4 | Denim Jeans         | Clothing    |   60.00 |             40 |
+|         5 | Blutooth Headphone  | Electronics |  150.00 |             15 |
++-----------+---------------------+-------------+---------+----------------+
+5 rows in set (0.003 sec)
+
+MariaDB [uov]> create table Customer(CustomerID INT(3) PRIMARY KEY, FullName VARCHAR(50), RDate DATE, PhoneNumber VARCHAR(30) );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [uov]> INSERT INTO Customer VALUES(1,"Alice Johnson","2021-03-15","+1234567890");
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [uov]> INSERT INTO Customer VALUES(2,"Bob Smith","2020-08-24","+0987654321");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> INSERT INTO Customer VALUES(3,"Carol Brown","2022-01-10","+01122334455");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> INSERT INTO Customer VALUES(4,"Dave Willson","2021-07-02","+02233445566");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> INSERT INTO Customer VALUES(5,"Eve Davis","2020-11-29","+03344556677");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> select * from Customer;
++------------+---------------+------------+--------------+
+| CustomerID | FullName      | RDate      | PhoneNumber  |
++------------+---------------+------------+--------------+
+|          1 | Alice Johnson | 2021-03-15 | +1234567890  |
+|          2 | Bob Smith     | 2020-08-24 | +0987654321  |
+|          3 | Carol Brown   | 2022-01-10 | +01122334455 |
+|          4 | Dave Willson  | 2021-07-02 | +02233445566 |
+|          5 | Eve Davis     | 2020-11-29 | +03344556677 |
++------------+---------------+------------+--------------+
+5 rows in set (0.000 sec)
+
+MariaDB [uov]> create table Sales(SalesID INT(3) PRIMARY KEY, ProductID INT(3), CustomerID INT(3), SaleDate DATE, QuantitySold INT(3));
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [uov]> INSERT INTO Sales VALUES(1,1,1,"2023-06-15",1);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [uov]> INSERT INTO Sales VALUES(2,2,2,"2023-06-18",2);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> INSERT INTO Sales VALUES(3,3,3,"2023-06-20",1);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> INSERT INTO Sales VALUES(4,4,4,"2023-06-25",3);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [uov]> INSERT INTO Sales VALUES(5,5,5,"2023-06-30",2);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [uov]> select * from Sales;
++---------+-----------+------------+------------+--------------+
+| SalesID | ProductID | CustomerID | SaleDate   | QuantitySold |
++---------+-----------+------------+------------+--------------+
+|       1 |         1 |          1 | 2023-06-15 |            1 |
+|       2 |         2 |          2 | 2023-06-18 |            2 |
+|       3 |         3 |          3 | 2023-06-20 |            1 |
+|       4 |         4 |          4 | 2023-06-25 |            3 |
+|       5 |         5 |          5 | 2023-06-30 |            2 |
++---------+-----------+------------+------------+--------------+
+5 rows in set (0.000 sec)
+
+
+MariaDB [uov]> select Name from Retail_Store;
++---------------------+
+| Name                |
++---------------------+
+| Ultra HD Television |
+| Running Shoes       |
+| Electric Kettle     |
+| Denim Jeans         |
+| Blutooth Headphone  |
++---------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [uov]> select CustomerID,RDate from Customer;
++------------+------------+
+| CustomerID | RDate      |
++------------+------------+
+|          1 | 2021-03-15 |
+|          2 | 2020-08-24 |
+|          3 | 2022-01-10 |
+|          4 | 2021-07-02 |
+|          5 | 2020-11-29 |
++------------+------------+
+5 rows in set (0.000 sec)
+
+MariaDB [uov]> select SaleID,SaleDate from Sales WHERE QuantitySold=2;
+ERROR 1054 (42S22): Unknown column 'SaleID' in 'field list'
+MariaDB [uov]> select SalesID,SaleDate from Sales WHERE QuantitySold=2;
++---------+------------+
+| SalesID | SaleDate   |
++---------+------------+
+|       2 | 2023-06-18 |
+|       5 | 2023-06-30 |
++---------+------------+
+2 rows in set (0.004 sec)
+
+MariaDB [uov]> select Name from Retail_Store WHERE Price>100;
++---------------------+
+| Name                |
++---------------------+
+| Ultra HD Television |
+| Blutooth Headphone  |
++---------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [uov]> select CustomerID from Customer WHERE RDATE<2021;
+Empty set, 1 warning (0.003 sec)
+
+MariaDB [uov]> select CustomerID from Customer WHERE RDATE<"2021-01-11";
++------------+
+| CustomerID |
++------------+
+|          2 |
+|          5 |
++------------+
+2 rows in set (0.000 sec)
+
+MariaDB [uov]> select DISTINCT Category from Retail_Store;
++-------------+
+| Category    |
++-------------+
+| Electronics |
+| Footwear    |
+| Appliances  |
+| Clothing    |
++-------------+
+4 rows in set (0.000 sec)
+
+MariaDB [uov]> UPDATE Retail_Store SET Price =145;
+Query OK, 5 rows affected (0.009 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+MariaDB [uov]> Delete from Customer
+    -> WHERE CustomerID=3;
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [uov]>
